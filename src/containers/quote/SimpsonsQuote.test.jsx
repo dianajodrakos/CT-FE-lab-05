@@ -1,6 +1,7 @@
 /* eslint-disable max-len */
 import React from 'react';
 import { render, screen, fireEvent, waitFor } from '@testing-library/react';
+import { act } from 'react-dom/test-utils';
 import { rest } from 'msw';
 import { setupServer } from 'msw/node';
 import SimpsonsQuote from '../../containers/quote/SimpsonsQuote';
@@ -33,9 +34,12 @@ describe('SimpsonsQuote test', () => {
       { name: 'get-quote' }
     );
 
-    fireEvent.click(submitButton);
-    return waitFor(() => {
-      expect(component).toMatchSnapshot();
+    act(() => {
+      fireEvent.click(submitButton);
+      });
+
+      return waitFor(() => {
+          expect(component).toMatchSnapshot();
       
     });
   });

@@ -1,6 +1,7 @@
 /* eslint-disable max-len */
 import React from 'react';
 import { render, screen, fireEvent, waitFor } from '@testing-library/react';
+import { act } from 'react-dom/test-utils';
 import { rest } from 'msw';
 import { setupServer } from 'msw/node';
 import SimpsonsQuote from '../../containers/quote/SimpsonsQuote';
@@ -24,9 +25,7 @@ describe('SimpsonsQuote test', () => {
   afterAll(() => mockServer.close());
 
   it('should click a button on the DOM and reload the page with a random Simpsons character quote', async () => {
-    const component = render(<SimpsonsQuote />);
-
-    screen.getByText('Get a Quote');
+    render(<SimpsonsQuote />);
 
     const submitButton = screen.getByRole(
       'button',
@@ -34,9 +33,9 @@ describe('SimpsonsQuote test', () => {
     );
 
     fireEvent.click(submitButton);
+
     return waitFor(() => {
-      expect(component).toMatchSnapshot();
-      
+      screen.getByText('Homer Simpson: And this is the snack holder where I can put my beverage or, if you will, cupcake.');
     });
   });
 });

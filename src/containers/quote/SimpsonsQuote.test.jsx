@@ -19,11 +19,11 @@ const mockServer = setupServer(
   })
 );
 
-describe('Container test', () => {
+describe('SimpsonsQuote test', () => {
   beforeAll(() => mockServer.listen());
   afterAll(() => mockServer.close());
 
-  it('should return a call to an API', async () => {
+  it('should click a button on the DOM and reload the page with a random Simpsons character quote', async () => {
     const component = render(<SimpsonsQuote />);
 
     screen.getByText('Get a Quote');

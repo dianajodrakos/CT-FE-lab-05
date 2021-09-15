@@ -1,6 +1,6 @@
 // Jest Snapshot v1, https://goo.gl/fbAQLP
 
-exports[`Container test should return a call to an API 1`] = `
+exports[`SimpsonsQuote test should click a button on the DOM and reload the page with a random Simpsons character quote 1`] = `
 Object {
   "asFragment": [Function],
   "baseElement": <body>

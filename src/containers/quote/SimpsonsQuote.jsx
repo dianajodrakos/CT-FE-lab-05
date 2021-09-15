@@ -2,25 +2,29 @@
 import React, { useState } from 'react';
 import Quote from '../../components/quote/Quote';
 import Load from '../../components/quote/Load';
+import { getQuote } from '../../services/simpsonsApi';
 
 const SimpsonsQuote = () => {
   const [loading, setLoading] = useState(false);
-  const [quote, setQuote] = useState({});
-
+  const [quote, setQuote] = useState(null);
 
   const handleClick = async () => {
     setLoading(true);
-    getQuote()
-      .then((quote) => setQuote(quote))
-      .finally(() => setLoading(false));
+    const newQuote = await getQuote();
+    setQuote(newQuote);
+    setLoading(false);
   };
-
-  if(loading) return <h1>Loading...</h1>;
 
   return (
     <>
       <Load onClick={handleClick} />
-      <Quote quote={quote.quote} character={quote.character} image={quote.image} /> 
+      { loading ? (<h2>Loading...</h2>) 
+        : (
+          quote && (
+            <Quote quote={quote.quote} character={quote.character} image={quote.image} />
+          )
+        )
+      }
     </>
   );
 };
